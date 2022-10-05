@@ -22,8 +22,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: bash -c "python manage.py migrate &&
-                  python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    env_file:
+      - .env.dev
     volumes:
       - ./backend/web_api:/app/backend
     ports:
@@ -39,3 +40,12 @@ services:
       - ./frontend:/app/frontend
     ports:
       - "3000:3000"
+  nginx:
+    image: nginx:1.22
+    ports: 
+      - "80:80"
+    volumes:
+      - ./nginx:/ect/nginx/conf.d
+    depends_on:
+      - backend
+      - frontend

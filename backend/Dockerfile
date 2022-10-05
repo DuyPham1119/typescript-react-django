@@ -18,7 +18,8 @@ ENV PATH="/app/env/bin:$PATH"
 RUN pip install -r requirements.txt
 
 COPY ./web_api ./
+RUN python manage.py collectstatic --no-input
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]doc
+CMD ["gunicorn", "-c", "config/conf.py", "--bind", ":8000", "--workers", "3", "web_api.wsgi:application"]
