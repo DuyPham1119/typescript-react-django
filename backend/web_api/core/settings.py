@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "user",
+    "book",
+    "payment",
 ]
 
 MIDDLEWARE = [
@@ -51,7 +55,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "web_api.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
@@ -69,7 +73,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "web_api.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
+
+AUTH_USER_MODEL = 'user.User'
 
 
 # Database
