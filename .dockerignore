@@ -1,2 +1,4 @@
 .git
+.redis
+.postgres
 /backend/env

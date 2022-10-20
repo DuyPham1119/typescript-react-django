@@ -4,12 +4,14 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     expose:
       - "5432"
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_db:/var/lib/postgres_db
   redis:
     image: redis
     expose:
@@ -35,7 +37,6 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
-    command: ["yarn", "start"]
     volumes:
       - ./frontend:/app/frontend
     ports:
@@ -49,3 +50,5 @@ services:
     depends_on:
       - backend
       - frontend
+volumes:
+  postgres_db:
