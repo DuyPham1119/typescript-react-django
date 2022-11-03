@@ -3,4 +3,4 @@ from django.contrib.auth.models import User
 
 
 class Cart(models.Model):
-    
+    pass

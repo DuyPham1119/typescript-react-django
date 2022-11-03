@@ -18,7 +18,9 @@ ENV PATH="/app/env/bin:$PATH"
 RUN pip install -r requirements.txt
 
 COPY ./web_api ./
-RUN python manage.py collectstatic --no-input
+RUN python manage.py collectstatic --no-input \
+    && python manager.py makemigrations \
+    && python manager.py migrate
 
 EXPOSE 8000
 
